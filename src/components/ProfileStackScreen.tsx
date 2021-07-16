@@ -13,7 +13,7 @@ const Profile = () => {
 };
 const ProfileStackScreen = () => (
   <ProfileStack.Navigator>
-    <ProfileStack.Screen name="Profile" component={Profile} />
+    <ProfileStack.Screen name="Profile" component={Profile} options={{headerTintColor: 'orange'}}/>
   </ProfileStack.Navigator>
 );
 const styles = StyleSheet.create({

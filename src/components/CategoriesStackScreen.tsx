@@ -13,7 +13,7 @@ const Categories = () => {
 };
 const CategoriesStackScreen = () => (
   <CategoriesStack.Navigator>
-    <CategoriesStack.Screen name="Categories" component={Categories} />
+    <CategoriesStack.Screen name="Categories" component={Categories} options={{headerTintColor: 'orange'}}/>
   </CategoriesStack.Navigator>
 );
 const styles = StyleSheet.create({

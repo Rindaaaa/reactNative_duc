@@ -13,7 +13,7 @@ const Cart = () => {
 };
 const CartStackScreen = () => (
   <CartStack.Navigator>
-    <CartStack.Screen name="Cart" component={Cart} />
+    <CartStack.Screen name="Cart" component={Cart} options={{headerTintColor: 'orange'}}/>
   </CartStack.Navigator>
 );
 const styles = StyleSheet.create({

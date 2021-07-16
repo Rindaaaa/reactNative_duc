@@ -13,7 +13,7 @@ const Home = () => {
 };
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen name="Home" component={Home} options={{headerTintColor: 'orange'}}/>
   </HomeStack.Navigator>
 );
 const styles = StyleSheet.create({
