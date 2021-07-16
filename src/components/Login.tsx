@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 
-const Login = ({navigation}) => {
+const Login = (props) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{margin: 12}}>
@@ -13,9 +13,7 @@ const Login = ({navigation}) => {
         />
         <Button
           title="Login"
-          onPress={() => {
-            navigation.navigate('Home');
-          }}
+          onPress={() => props.login(true)}
         />
       </View>
     </SafeAreaView>
