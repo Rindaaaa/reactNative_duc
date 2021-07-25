@@ -1,5 +1,5 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import HomeStackScreen from './HomeStackScreen';
 import ProfileStackScreen from './ProfileStackScreen';
@@ -22,7 +22,7 @@ const TabView = () => {
         name="Home"
         component={HomeStackScreen}
         options={{
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={23} color={color} />
           ),
         }}
@@ -31,7 +31,7 @@ const TabView = () => {
         name="Categories"
         component={CategoriesStackScreen}
         options={{
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <FontAwesome name="list" size={23} color={color} />
           ),
         }}
@@ -40,7 +40,7 @@ const TabView = () => {
         name="Cart"
         component={CartStackScreen}
         options={{
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <FontAwesome name="shopping-cart" size={23} color={color} />
           ),
         }}
@@ -49,7 +49,7 @@ const TabView = () => {
         name="Profile"
         component={ProfileStackScreen}
         options={{
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <FontAwesome name="user" size={23} color={color} />
           ),
         }}
