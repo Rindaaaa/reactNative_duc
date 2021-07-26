@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ color: 'white', fontSize: 40, fontWeight: 'bold' }}>Welcome!</Text>
+        <Text style={{ color: '#1C2F3D', fontSize: 40, fontWeight: 'bold' }}>Welcome, guest!</Text>
       </View>
       <View style={styles.footer}>
         <Text style={{ fontSize: 18, color: 'white' }}>Email</Text>
@@ -41,7 +41,7 @@ const Login = () => {
           onPress={() => { signIn() }}
           style={styles.signIn_button}
         >
-          <Text style={{ textAlign: 'center' }}>Sign In</Text>
+          <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 15, color: '#1C2F3D'}}>Sign In</Text>
         </TouchableOpacity>
       </View>
     </View>
