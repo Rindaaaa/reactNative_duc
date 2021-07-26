@@ -1,10 +1,10 @@
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { DrawerItem } from '@react-navigation/drawer';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { AuthContext } from './context';
 
-const DrawerContent = props => {
+const DrawerContent = (props) => {
     const { signOut } = React.useContext(AuthContext);
     return (
         <View style={{ flex: 1 }}>

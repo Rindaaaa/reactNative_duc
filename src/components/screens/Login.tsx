@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-nativ
 import { AuthContext } from './context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-const Login = (props) => {
+const Login = () => {
   const { signIn } = React.useContext(AuthContext);
 
   return (
