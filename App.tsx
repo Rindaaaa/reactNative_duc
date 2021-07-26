@@ -12,21 +12,21 @@ import DrawerContent from './src/components/screens/DrawerContent';
 const Drawer = createDrawerNavigator();
 
 const App = () => {
-  const [userToken, setUserToken] = useState(null);
+  const [isLogIn, setIsLogIn] = useState(false);
 
   const authContext = React.useMemo(() => ({
     signIn: () => {
-      setUserToken('duc');
+      setIsLogIn(true);
     },
     signOut: () => {
-      setUserToken(null);
+      setIsLogIn(false);
     },
   }), []);
 
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {userToken != null ? (
+        {isLogIn == true ? (
           <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
             <Drawer.Screen name="Home" component={TabView} />
             <Drawer.Screen name="Setting" component={SettingsScreen} />
