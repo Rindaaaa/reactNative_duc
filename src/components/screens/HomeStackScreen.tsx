@@ -1,14 +1,16 @@
-import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import React,{ useContext } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import { UserContext } from '../../../App';
 const HomeStack = createStackNavigator();
 
 const Home = () => {
+  const user = useContext(UserContext);
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Welcome {user?.userInfo?.name} </Text>
+      <Text>Pass: {user?.userInfo?.password} </Text>
     </View>
   );
 };

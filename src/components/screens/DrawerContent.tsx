@@ -1,11 +1,12 @@
 import { DrawerItem } from '@react-navigation/drawer';
-import React from 'react';
+import React,{useContext} from 'react';
 import { View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { AuthContext } from './context';
+import { UserContext } from '../../../App';
 
 const DrawerContent = (props) => {
-    const { signOut } = React.useContext(AuthContext);
+    const userContext = useContext(UserContext);
+
     return (
         <View style={{ flex: 1 }}>
             <DrawerItem 
@@ -27,9 +28,9 @@ const DrawerContent = (props) => {
                     <FontAwesome color={color} size={size} name="sign-out" />
                 )}
                 label="Sign out"
-                onPress={() => {
-                    signOut();
-                }}
+                onPress={() => 
+                    userContext.login('')
+                }
             />
         </View>
     );
