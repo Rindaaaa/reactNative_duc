@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -7,13 +7,29 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { EndPoint } from '../config';
+import { UserProps } from '../../../App';
 import {UserContext} from '../../../App';
+import { connect, useDispatch } from 'react-redux';
+import { login } from '../redux/action/userAction';
 
-const Login = () => {
+const SignInScreen: FC = ({navigation}) => {
   const [name, setName] = useState<string>('');
-  const [password, setPass] = useState<string>('');
-
-  const userContext = useContext(UserContext);
+  const [pass, setPass] = useState<string>('');
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   fetch(`${EndPoint}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       Accept: 'application/json',
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setName(res);
+  //       setPass(res);
+  //     });
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -46,13 +62,8 @@ const Login = () => {
           />
         </View>
 
-        <TouchableOpacity
-          onPress={() =>
-            userContext.login({
-              name,
-              password,
-            })
-          }
+        <TouchableOpacity 
+          onPress={() => dispatch(login(name, pass))} 
           style={styles.signIn_button}>
           <Text
             style={{
@@ -62,6 +73,20 @@ const Login = () => {
               color: '#1C2F3D',
             }}>
             Sign In
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SignUp')}
+          style={styles.signUp_button}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontWeight: 'bold',
+              fontSize: 15,
+              color: '#1C2F3D',
+            }}>
+            Sign Up
           </Text>
         </TouchableOpacity>
       </View>
@@ -100,6 +125,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7C744',
     borderRadius: 15,
   },
+  signUp_button: {
+    paddingVertical: 15,
+    backgroundColor: '#F7C744',
+    borderRadius: 15,
+  },
 });
 
-export default Login;
+export default SignInScreen;

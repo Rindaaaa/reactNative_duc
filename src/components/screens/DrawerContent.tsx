@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { UserContext } from '../../../App';
 
-const DrawerContent = (props) => {
+const DrawerContent = (props: any) => {
     const userContext = useContext(UserContext);
 
     return (

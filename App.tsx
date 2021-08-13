@@ -1,45 +1,66 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import TabView from './src/components/screens/TabView';
-import Login from './src/components/screens/Login';
-import {useState} from 'react';
-import SettingsScreen from './src/components/screens/SettingScreen';
-import DrawerContent from './src/components/screens/DrawerContent';
+import {useEffect, useState} from 'react';
+import {Alert} from 'react-native';
+import {EndPoint} from './src/components/config';
+import { Provider } from 'react-redux';
+import store from './src/components/redux/store';
+import Navigation from './src/Navigation';
 
 const Drawer = createDrawerNavigator();
 
 export type UserProps = {
-  userInfo: {
-    name: string;
-    password: string;
-  };
+  name: string;
+  pass: string;
   login: (val: any) => void;
 };
 
 export const UserContext = React.createContext<UserProps>({});
 
 const App = () => {
-  const [user, setUser] = useState({
-    name: '',
-    password: '',
-  });
+  const [userLogin, setUserLogin] = useState<string>();
+  const [userList, setUserList] = useState([]);
+
+  // useEffect(() => {
+  //   fetch(`${EndPoint}/user`, {
+  //     method: 'GET',
+  //     headers: {
+  //       Accept: 'application/json',
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setUserList(res);
+  //     });
+  // }, []);
+
+  // const login = (user: UserProps) => {
+  //   const userInfo = userList.find(c => c.name === user.name);
+  //   if (userInfo === undefined) {
+  //     Alert.alert('Tai khoan khong ton tai');
+  //   } else {
+  //     if (userInfo.password !== user.pass) {
+  //       Alert.alert('Sai mat khau!');
+  //     } else setUserLogin(user.name);
+  //   }
+  // };
 
   return (
-    <UserContext.Provider value={{userInfo: user, login: setUser}}>
-      <NavigationContainer>
-        {user.name ? (
-          <Drawer.Navigator
-            drawerContent={props => <DrawerContent {...props} />}>
-            <Drawer.Screen name="Home" component={TabView} />
-            <Drawer.Screen name="Setting" component={SettingsScreen} />
-          </Drawer.Navigator>
-        ) : (
-          <Login />
-        )}
-      </NavigationContainer>
-    </UserContext.Provider>
+    <Provider store={store}>
+        {/* <NavigationContainer>
+          {userLogin != null ? (
+            <Drawer.Navigator
+              drawerContent={props => <DrawerContent {...props} />}>
+              <Drawer.Screen name="Home" component={TabView} />
+              <Drawer.Screen name="Setting" component={SettingsScreen} />
+            </Drawer.Navigator>
+          ) : (
+            <SignScreen />
+          )}
+        </NavigationContainer> */}
+      <Navigation />
+    </Provider>
   );
 };
 
