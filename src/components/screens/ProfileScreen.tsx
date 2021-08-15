@@ -7,7 +7,7 @@ import { UserContext } from '../../../App';
 
 const ProfileStack = createStackNavigator();
 
-const Profile = () => {
+const ProfileScreen = () => {
   const user = useContext(UserContext);
   return (
     <View style={styles.container}>
@@ -25,20 +25,11 @@ const Profile = () => {
     </View>
   );
 };
-const ProfileStackScreen = ({ navigation }) => (
-  <ProfileStack.Navigator>
-    <ProfileStack.Screen name="Profile" component={Profile} options={{
-      headerTintColor: 'orange',
-      headerLeft: () => (
-        <FontAwesome.Button name="navicon" size={20} color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></FontAwesome.Button>
-      )
-    }} />
-  </ProfileStack.Navigator>
-);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
 });
 
-export default ProfileStackScreen;
+export default ProfileScreen;

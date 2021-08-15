@@ -17,18 +17,18 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {getProduct, searchProduct} from '../redux/action/productActions';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeStackScreen from './HomeStackScreen';
+import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
 
 const MainStack = createStackNavigator();
 
-const MainStackScreen = () => {
+const MainScreen = () => {
   return (
     <MainStack.Navigator headerMode='none'>
-        <MainStack.Screen name ={"Home"} component={HomeStackScreen}/>
+        <MainStack.Screen name ={"Home"} component={HomeScreen}/>
         <MainStack.Screen name ={"DetailScreen"} component={DetailScreen}/>
     </MainStack.Navigator>
   );
 };
 
-export default MainStackScreen;
+export default MainScreen;

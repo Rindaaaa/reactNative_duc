@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import HomeStackScreen from './HomeStackScreen';
-import ProfileStackScreen from './ProfileStackScreen';
-import CategoriesStackScreen from './CategoriesStackScreen';
-import CartStackScreen from './CartStackScreen';
-import MainStackScreen from './MainScreen';
+import HomeScreen from './HomeScreen';
+import CategoriesScreen from './CategoriesScreen';
+import ProfileScreen from './ProfileScreen';
+import CartScreen from './CartScreen';
+import MainScreen from './MainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,12 +16,12 @@ const TabView = () => {
         labelStyle: {
           fontSize: 15,
         },
-        activeTintColor: 'orange',
-        inactiveTintColor: 'black',
+        activeTintColor: '#008080',
+        inactiveTintColor: '#808080',
       }}>
       <Tab.Screen
         name="Home"
-        component={MainStackScreen}
+        component={MainScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={23} color={color} />
@@ -30,7 +30,7 @@ const TabView = () => {
       />
       <Tab.Screen
         name="Categories"
-        component={CategoriesStackScreen}
+        component={CategoriesScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="list" size={23} color={color} />
@@ -39,7 +39,7 @@ const TabView = () => {
       />
       <Tab.Screen
         name="Cart"
-        component={CartStackScreen}
+        component={CartScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="shopping-cart" size={23} color={color} />
@@ -48,7 +48,7 @@ const TabView = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileStackScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="user" size={23} color={color} />

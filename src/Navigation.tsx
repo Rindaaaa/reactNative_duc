@@ -1,16 +1,17 @@
 import React, {FC} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import DrawerContent from './components/screens/DrawerContent';
 import TabView from './components/screens/TabView';
-import SettingsScreen from './components/screens/SettingScreen';
 import SignScreen from './components/screens/SignScreen';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LOGIN } from './components/redux/actionTypes';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'react-native';
+import { useAppSelector } from '../hooks';
+import MainScreen from './components/screens/MainScreen';
 
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const Navigation: FC = () => {
   const dispatch = useDispatch();
@@ -36,14 +37,15 @@ const Navigation: FC = () => {
       
     }
   }
-  const user = useSelector(store => store?.userReducer)
+  const user = useAppSelector(state => state?.userReducer)
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={"white"} barStyle="dark-content" />
       {user.name ? (
-        <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-          <Drawer.Screen name="Home" component={TabView} />
-          <Drawer.Screen name="Setting" component={SettingsScreen} />
-        </Drawer.Navigator>
+        <Stack.Navigator headerMode="none">
+          <Stack.Screen name="Home" component={TabView} />
+          {/* <Stack.Screen name="Detail" component={MainScreen} /> */}
+        </Stack.Navigator>
       ) : (
         <SignScreen />
       )}

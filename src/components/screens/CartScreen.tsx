@@ -5,23 +5,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const CartStack = createStackNavigator();
 
-const Cart = () => {
+const CartScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Cart Screen</Text>
     </View>
   );
 };
-const CartStackScreen = ({navigation}) => (
-  <CartStack.Navigator>
-    <CartStack.Screen name="Cart" component={Cart} options={{
-      headerTintColor: 'orange', 
-      headerLeft: () => (
-        <FontAwesome.Button name="navicon" size={20} color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></FontAwesome.Button>
-      )
-    }}/>
-  </CartStack.Navigator>
-);
+
 const styles = StyleSheet.create({
   container: {
     textAlign: 'center',
@@ -31,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartStackScreen;
+export default CartScreen;

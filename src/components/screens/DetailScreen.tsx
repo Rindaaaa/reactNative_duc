@@ -1,85 +1,53 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, Button} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const DetailsScreen = ({navigation, item}) => {
-
+const DetailScreen = ({navigation, route}) => {
+  const product = route.params;
   return (
-    <SafeAreaView style={{backgroundColor: "white"}}>
-      <View style={style.header}>
-        <Icon name="arrow-back-ios" size={28} onPress={navigation.goBack} />
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Details</Text>
+    <SafeAreaView style={{backgroundColor: "white",flex: 1}}>
+     <View style={styles.header}>
+        <Ionicons name="arrow-back" size={28} onPress={navigation.goBack} />
+        <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 20}}>Details</Text>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 280,
-          }}>
-          <Image source={item.image} style={{height: 220, width: 220}} />
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={{ uri: product.img }} />
+      </View>
+      <View style={styles.footer}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={{fontWeight:'bold', fontSize: 18, color: 'white'}}>{product.name}</Text>
+          <Text style={{fontWeight:'bold', fontSize: 18, color: 'white'}}>${product.price}</Text>
         </View>
-        <View style={style.details}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{fontSize: 25, fontWeight: 'bold', color: "white"}}>
-              {item.name}
-            </Text>
-            <View style={style.iconContainer}>
-              <Icon name="favorite-border" color={"white"} size={25} />
-            </View>
-          </View>
-          <Text style={style.detailsText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries.
-          </Text>
-          <View style={{marginTop: 40, marginBottom: 40}}>
-            <Button title="Add To Cart"></Button>
-          </View>
-        </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingVertical: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: 15,
   },
-  details: {
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 60,
-    backgroundColor: "white",
-    borderTopRightRadius: 40,
-    borderTopLeftRadius: 40,
-  },
-  iconContainer: {
-    backgroundColor: "white",
-    height: 50,
-    width: 50,
+  imageContainer:{
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
+    alignItems: 'center'
   },
-  detailsText: {
-    marginTop: 10,
-    lineHeight: 22,
-    fontSize: 16,
-    color: "white",
+  footer:{
+    flex: 1,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    backgroundColor: '#008080',
   },
+  image:{
+    height: '100%',
+    width: 250,
+    resizeMode: 'contain'
+  }
 });
 
-export default DetailsScreen;
+export default DetailScreen;
