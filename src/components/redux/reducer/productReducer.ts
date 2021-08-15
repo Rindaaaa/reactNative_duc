@@ -1,20 +1,26 @@
+import { SEARCH_PRODUCT } from './../actionTypes';
 import { GET_PRODUCT } from "../actionTypes";
 
 const initialValues = {
-    name: '',
-    price: 0,
-    img: '',
+   data: [],
+   data_filter: []
   };
 
   export default function productReducer(state = initialValues, action: any) {
     switch (action.type) {
       case GET_PRODUCT:
         return {
-          name: action.payload.res,
-          price: action.payload.res,
-          img: action.payload.res,
+          data: action.payload,
+          data_filter: action.payload,
         };
+      case SEARCH_PRODUCT:
+        return {
+          ...state,
+          data_filter: state.data.filter(product => product.title.toLowerCase().includes(textToSearch.toLowerCase()))
+        }
       default:
         return state;
+
+      
     }
   }

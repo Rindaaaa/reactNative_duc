@@ -1,3 +1,4 @@
+import { SEARCH_PRODUCT } from './../actionTypes';
 import { GET_PRODUCT } from '../actionTypes';
 import { Dispatch } from '@reduxjs/toolkit';
 import { EndPoint } from '../../config';
@@ -16,8 +17,15 @@ export const getProduct = () => async (dispatch: Dispatch) => {
                 type: GET_PRODUCT,
                 payload: res
             });
-        } 
+        }
     } catch (error) {
         console.log(error);
     }
 };
+
+export const searchProduct = (textToSearch: string) => async (dispatch: Dispatch) => {
+    dispatch({
+        type: SEARCH_PRODUCT,
+        payload: {textToSearch},
+    })
+  }

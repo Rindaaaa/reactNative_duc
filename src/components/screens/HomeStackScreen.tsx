@@ -1,41 +1,49 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, FlatList, SafeAreaView, TextInput, Image, Text, TouchableOpacity, Alert } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  TextInput,
+  Image,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+  Pressable,
+} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../redux/action/productActions';
+import {getProduct, searchProduct} from '../redux/action/productActions';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 const HomeStack = createStackNavigator();
 
-const Home = () => {
-  const product = useSelector(store => store?.productReducer);
+const Home = ({navigation}) => {
+  const product = useAppSelector(state => state.productReducer)
+  const dispatch = useAppDispatch();
+  
   console.log(product)
-  const dispatch = useDispatch();
+  
 
   useEffect(() => {
-    dispatch(getProduct());
-  }, []);
+    dispatch(getProduct())
+  }, [])
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <View>
-          <TextInput style={styles.search} placeholder={' Tìm kiếm'} />
+          <TextInput style={styles.search} placeholder={' Tìm kiếm'}  onChangeText={(textToSearch) => dispatch(searchProduct(textToSearch)) }  />
         </View>
         <FlatList
           numColumns={2}
-          data={product}
+          data={product.data}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.itemBox}
-              onPress={() =>
-                Alert.alert(
-                  'Giá của sản phẩm: $ ' +
-                  item.price +
-                  '\nTên của sản phẩm: ' +
-                  item.name,
-                )
-              }>
+              onPress={() => navigation.navigate('DetailScreen', product.data)
+            
+            }>
               <Image style={styles.image} source={{ uri: item.img }} />
               <Text style={{ marginTop: 30 }}>{item.name}</Text>
               <Text style={{ marginTop: 30, color: 'red' }}>${item.price}</Text>
@@ -44,17 +52,26 @@ const Home = () => {
           keyExtractor={item => item.name.toString()}
         />
       </SafeAreaView>
-    </View>
   );
 };
-const HomeStackScreen = ({ navigation }) => (
-  <HomeStack.Navigator >
-    <HomeStack.Screen name="Home" component={Home} options={{
-      headerTintColor: 'orange',
-      headerLeft: () => (
-        <FontAwesome.Button name="navicon" size={20} color="black" backgroundColor="white" onPress={() => navigation.openDrawer()}></FontAwesome.Button>
-      )
-    }} />
+
+const HomeStackScreen = ({navigation}) => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen
+      name="Home"
+      component={Home}
+      options={{
+        headerTintColor: '#34C6DF',
+        headerLeft: () => (
+          <FontAwesome.Button
+            name="navicon"
+            size={20}
+            color="black"
+            backgroundColor="white"
+            onPress={() => navigation.openDrawer()}></FontAwesome.Button>
+        ),
+      }}
+    />
   </HomeStack.Navigator>
 );
 const styles = StyleSheet.create({

@@ -48,17 +48,6 @@ const App = () => {
 
   return (
     <Provider store={store}>
-        {/* <NavigationContainer>
-          {userLogin != null ? (
-            <Drawer.Navigator
-              drawerContent={props => <DrawerContent {...props} />}>
-              <Drawer.Screen name="Home" component={TabView} />
-              <Drawer.Screen name="Setting" component={SettingsScreen} />
-            </Drawer.Navigator>
-          ) : (
-            <SignScreen />
-          )}
-        </NavigationContainer> */}
       <Navigation />
     </Provider>
   );

@@ -5,6 +5,7 @@ import HomeStackScreen from './HomeStackScreen';
 import ProfileStackScreen from './ProfileStackScreen';
 import CategoriesStackScreen from './CategoriesStackScreen';
 import CartStackScreen from './CartStackScreen';
+import MainStackScreen from './MainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ const TabView = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeStackScreen}
+        component={MainStackScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={23} color={color} />
