@@ -19,6 +19,7 @@ import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
+import CartScreen from './CartScreen';
 
 const MainStack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const MainScreen = () => {
     <MainStack.Navigator headerMode='none'>
         <MainStack.Screen name ={"Home"} component={HomeScreen}/>
         <MainStack.Screen name ={"DetailScreen"} component={DetailScreen}/>
+        {/* <MainStack.Screen name ={"CartScreen"} component={CartScreen}/> */}
     </MainStack.Navigator>
   );
 };

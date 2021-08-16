@@ -2,7 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './HomeScreen';
-import CategoriesScreen from './CategoriesScreen';
 import ProfileScreen from './ProfileScreen';
 import CartScreen from './CartScreen';
 import MainScreen from './MainScreen';
@@ -25,15 +24,6 @@ const TabView = () => {
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={23} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Categories"
-        component={CategoriesScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="list" size={23} color={color} />
           ),
         }}
       />
