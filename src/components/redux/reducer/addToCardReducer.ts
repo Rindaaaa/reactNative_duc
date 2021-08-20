@@ -9,8 +9,8 @@ export default function addToCardReducer(state = initialValues, action: any) {
     switch (action.type) {
         case ADD_TO_CARD:
               return {
-                // ...state,
-                product: action.payload,
+                ...state,
+                product: action.payload.product,
              };
         case GET_PRODUCT_CART:
             return{

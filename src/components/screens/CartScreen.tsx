@@ -27,10 +27,11 @@ const CartScreen = () => {
   const navigation = useNavigation();
   const product = useAppSelector(state => state.addToCardReducer);
   const dispatch = useAppDispatch();
-  
-  useEffect(() => {
-    dispatch(getProductCard(product));
-  },[]);
+  console.log('productCart',product)
+
+  // useEffect(() => {
+  //   dispatch(getProductCard(product));
+  // },[]);
   
   return (
     <SafeAreaView style={{backgroundColor: "white",flex: 1}}>
@@ -40,7 +41,7 @@ const CartScreen = () => {
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={product.product.product}
+        data={product.product}
         renderItem={({item}) => (
           <View style = {styles.itemBox}>
             <Image source={{uri: item.img}} style={styles.image}/>

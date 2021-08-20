@@ -16,7 +16,7 @@ const initialValues = {
       case SEARCH_PRODUCT:
         return {
           ...state,
-          data_filter: state.data.filter(product => product.title.toLowerCase().includes(textToSearch.toLowerCase()))
+          data_filter: state.data.filter(product => product.name.toLowerCase().includes(textToSearch.toLowerCase()))
         }
       default:
         return state;

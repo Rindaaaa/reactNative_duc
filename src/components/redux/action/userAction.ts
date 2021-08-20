@@ -5,21 +5,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { EndPoint } from '../../config';
 import { Alert } from 'react-native';
 
-// export const login = (name: string, pass: string) => async (dispatch: Dispatch) => {
-//   try {
-//     await AsyncStorage.setItem('@user_data', JSON.stringify({name, pass}));
-//     dispatch ({
-//       type: LOGIN,
-//       payload: {
-//         name,
-//         pass,
-//       },
-//     });
-//   } catch (error) {
-//   }
-// };
-
-export const login = (email: string, pass: string) => async (dispatch: Dispatch) => {
+export const logIn = (email: string, pass: string) => async (dispatch: Dispatch) => {
   try {
     await AsyncStorage.setItem('@user_data', JSON.stringify({ email, pass }));
     try {
@@ -30,9 +16,9 @@ export const login = (email: string, pass: string) => async (dispatch: Dispatch)
         },
       });
       const res = await result.json();
-      const userInfo = res.find((c: { email: string; }) => c.email === email);
+      const userInfo = res.find((user: { email: string }) => user.email === email);
       if (userInfo === undefined) {
-        Alert.alert('Wrong email');
+        Alert.alert('Wrong email!');
       } else {
         if (userInfo.password !== pass) {
           Alert.alert('Wrong password!');

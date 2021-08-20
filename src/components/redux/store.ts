@@ -1,4 +1,3 @@
-import { addToCard } from './action/addToCardActions';
 import userReducer from "./reducer/userReducer";
 import productReducer from "./reducer/productReducer";
 import addToCardReducer from './reducer/addToCardReducer';

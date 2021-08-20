@@ -7,11 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { EndPoint } from '../config';
-import { UserProps } from '../../../App';
-import {UserContext} from '../../../App';
-import { connect, useDispatch } from 'react-redux';
-import { login } from '../redux/action/userAction';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../redux/action/userAction';
 import { useNavigation } from '@react-navigation/native';
 
 const SignInScreen: FC = () => {
@@ -52,7 +49,7 @@ const SignInScreen: FC = () => {
         </View>
 
         <TouchableOpacity 
-          onPress={() => dispatch(login(email, pass))} 
+          onPress={() => dispatch(logIn(email, pass))} 
           style={styles.signIn_button}>
           <Text
             style={{

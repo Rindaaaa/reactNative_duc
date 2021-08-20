@@ -23,23 +23,11 @@ import AddProductScreen from './AddProductScreen';
 const HomeScreen = ({}) => {
   const product = useAppSelector(state => state.productReducer)
   const dispatch = useAppDispatch();
-
+  const navigation = useNavigation();
+  
   useEffect(() => {
     dispatch(getProduct());
   },[])
-  const navigation = useNavigation();
-  // async function fetchProduct() {
-  //   return fetch(`${EndPoint}/products`, {
-  //     method: 'GET',
-  //     headers: {
-  //         Accept: 'application/json',
-  //     },
-  //   }) 
-  //   .then(res => res.json());
-  // }
-
-  // const product = useQuery('fetchProduct', fetchProduct);
-  // const listProduct = product.data;
 
   return(
     <SafeAreaView style={styles.container}>
@@ -71,6 +59,7 @@ const HomeScreen = ({}) => {
           <TextInput
             style={{flex: 1}}
             placeholder="Search"
+            onChangeText={(textToSearch)=> dispatch(searchProduct(textToSearch))}
           />
         </View>
       </View>
@@ -85,7 +74,7 @@ const HomeScreen = ({}) => {
       
       <FlatList
           numColumns={2}
-          data={product.data}
+          data={product.data_filter}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.itemBox}
