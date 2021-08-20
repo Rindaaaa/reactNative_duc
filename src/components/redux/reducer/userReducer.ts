@@ -1,17 +1,24 @@
+import { LOGOUT } from './../actionTypes';
 import { LOGIN } from "../actionTypes";
 
 const initialValues = {
-  name: '',
+  email: '',
   pass: '',
+  isLogIn: false,
 };
 
 export default function userReducer(state = initialValues, action: any) {
   switch (action.type) {
     case LOGIN:
       return {
-        name: action.payload.name,
+        email: action.payload.email,
         pass: action.payload.pass,
+        isLogIn: true,
       };
+    case LOGOUT:
+      return {
+        isLogIn: false,
+      }
     default:
       return state;
   }

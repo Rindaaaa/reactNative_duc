@@ -3,8 +3,11 @@ import {View, StyleSheet, Text, Image, TouchableOpacity, Alert} from 'react-nati
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { addToCard, getProductCard } from '../redux/action/addToCardActions';
 
-const data =[
+const data = [
   {
     name: "Biofuse Goggles",
     price: 62,
@@ -20,7 +23,15 @@ const data =[
 ];
 
 
-const CartScreen = ({navigation}) => {
+const CartScreen = () => {
+  const navigation = useNavigation();
+  const product = useAppSelector(state => state.addToCardReducer);
+  const dispatch = useAppDispatch();
+  
+  useEffect(() => {
+    dispatch(getProductCard(product));
+  },[]);
+  
   return (
     <SafeAreaView style={{backgroundColor: "white",flex: 1}}>
       <View style={styles.header}>
@@ -29,7 +40,7 @@ const CartScreen = ({navigation}) => {
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={product.product.product}
         renderItem={({item}) => (
           <View style = {styles.itemBox}>
             <Image source={{uri: item.img}} style={styles.image}/>

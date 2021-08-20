@@ -2,19 +2,18 @@ import React, {FC} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import TabView from './components/screens/TabView';
 import SignScreen from './components/screens/SignScreen';
-import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LOGIN } from './components/redux/actionTypes';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
-import { useAppSelector } from '../hooks';
-import MainScreen from './components/screens/MainScreen';
+import { useAppDispatch, useAppSelector } from '../hooks';
 
 const Stack = createStackNavigator();
 
 const Navigation: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();  
+  const user = useAppSelector(state => state?.userReducer)
 
   useEffect(() => {
     getUserCache();
@@ -34,17 +33,15 @@ const Navigation: FC = () => {
         });
       }
     } catch (error) {
-      
     }
-  }
-  const user = useAppSelector(state => state?.userReducer)
+  };
+
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={"white"} barStyle="dark-content" />
-      {user.name ? (
+      {user.isLogIn == true ? (
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home" component={TabView} />
-          {/* <Stack.Screen name="Detail" component={MainScreen} /> */}
         </Stack.Navigator>
       ) : (
         <SignScreen />

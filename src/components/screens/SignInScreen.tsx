@@ -12,24 +12,13 @@ import { UserProps } from '../../../App';
 import {UserContext} from '../../../App';
 import { connect, useDispatch } from 'react-redux';
 import { login } from '../redux/action/userAction';
+import { useNavigation } from '@react-navigation/native';
 
-const SignInScreen: FC = ({navigation}) => {
-  const [name, setName] = useState<string>('');
+const SignInScreen: FC = () => {
+  const [email, setEmail] = useState<string>('');
   const [pass, setPass] = useState<string>('');
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   fetch(`${EndPoint}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       Accept: 'application/json',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setName(res);
-  //       setPass(res);
-  //     });
-  // }, []);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -44,7 +33,7 @@ const SignInScreen: FC = ({navigation}) => {
             placeholder="Username"
             style={styles.input}
             placeholderTextColor="white"
-            onChangeText={setName}
+            onChangeText={setEmail}
           />
         </View>
 
@@ -63,7 +52,7 @@ const SignInScreen: FC = ({navigation}) => {
         </View>
 
         <TouchableOpacity 
-          onPress={() => dispatch(login(name, pass))} 
+          onPress={() => dispatch(login(email, pass))} 
           style={styles.signIn_button}>
           <Text
             style={{

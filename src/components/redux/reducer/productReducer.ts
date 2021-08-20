@@ -20,7 +20,5 @@ const initialValues = {
         }
       default:
         return state;
-
-      
     }
   }

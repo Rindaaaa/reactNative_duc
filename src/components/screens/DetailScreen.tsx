@@ -1,4 +1,5 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,10 +9,20 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import { Dialog } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useAppDispatch } from '../../../hooks';
+import { addToCard } from '../redux/action/addToCardActions';
 
-const DetailScreen = ({navigation, route}) => {
+const DetailScreen = ({route}: any) => {
   const product = route.params;
+  const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   dispatch(addToCard(product));
+  // },[])
+
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
       <View style={styles.header}>
@@ -32,8 +43,11 @@ const DetailScreen = ({navigation, route}) => {
             ${product.price}
           </Text>
         </View>
+        <Text style={styles.detailText}>
+          {product.detailProduct}
+        </Text>
         <TouchableOpacity
-          onPress={() => Alert.alert('Added')}
+          onPress={() => dispatch(addToCard(product))}
           style={styles.addCart}>
           <Text
             style={{
@@ -76,10 +90,16 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   addCart: {
-    marginTop: 100,
     paddingVertical: 15,
     backgroundColor: 'white',
     borderRadius: 15,
+  },
+  detailText: {
+    fontSize: 18,
+    color: 'white',
+    marginTop: 50,
+    flex: 1,
+    lineHeight: 20
   },
 });
 

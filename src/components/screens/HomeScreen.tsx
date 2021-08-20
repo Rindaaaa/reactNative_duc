@@ -8,20 +8,39 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import {getProduct, searchProduct} from '../redux/action/productActions';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { Avatar } from 'react-native-paper';
+import { EndPoint } from '../config';
+import {useQuery} from 'react-query';
+import { useNavigation } from '@react-navigation/native';
+import AddProductScreen from './AddProductScreen';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({}) => {
   const product = useAppSelector(state => state.productReducer)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getProduct());
   },[])
-  
+  const navigation = useNavigation();
+  // async function fetchProduct() {
+  //   return fetch(`${EndPoint}/products`, {
+  //     method: 'GET',
+  //     headers: {
+  //         Accept: 'application/json',
+  //     },
+  //   }) 
+  //   .then(res => res.json());
+  // }
+
+  // const product = useQuery('fetchProduct', fetchProduct);
+  // const listProduct = product.data;
+
   return(
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -31,13 +50,15 @@ const HomeScreen = ({navigation}) => {
             Beach Store
           </Text>
         </View>
-        <Avatar.Image 
-          source={{
-            uri: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-9/132580753_2839890872917437_5490737767595045991_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=K-SIKKfIVG4AX9oaVnA&_nc_ht=scontent.fhan3-2.fna&oh=a42c6245e3a8e559175e728f3e13f9bf&oe=612A6223',
-          }}
-          size={60}
-          style={{marginTop: 20}}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
+          <Avatar.Image 
+            source={{
+              uri: 'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-9/132580753_2839890872917437_5490737767595045991_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=K-SIKKfIVG4AX9oaVnA&_nc_ht=scontent.fhan3-2.fna&oh=a42c6245e3a8e559175e728f3e13f9bf&oe=612A6223',
+            }}
+            size={60}
+            style={{marginTop: 20}}
+          />
+        </TouchableOpacity>
       </View>
       
       <View
@@ -53,6 +74,15 @@ const HomeScreen = ({navigation}) => {
           />
         </View>
       </View>
+      <View style={{alignItems: 'center', marginBottom: 20}}>
+        <TouchableOpacity 
+          onPress={() => navigation.navigate('AddProductScreen')}
+          style={styles.addButton}
+        >
+          <MaterialIcons name="add" size={20} style={{color: 'white'}}/>
+        </TouchableOpacity>
+      </View>
+      
       <FlatList
           numColumns={2}
           data={product.data}
@@ -112,6 +142,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 30
   },
+  addButton: {
+    backgroundColor: '#00CED1', 
+    height: 35, 
+    width: 35, 
+    justifyContent: 'center',
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    alignItems: 'center'
+  }
 });
 
 export default HomeScreen;
