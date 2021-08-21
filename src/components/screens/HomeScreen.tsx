@@ -58,7 +58,7 @@ const HomeScreen = ({}) => {
           <Icon name="search" size={28} style={{marginHorizontal: 10}}/>
           <TextInput
             style={{flex: 1}}
-            placeholder="Search"
+            placeholder="Search Products"
             onChangeText={(textToSearch)=> dispatch(searchProduct(textToSearch))}
           />
         </View>
@@ -72,6 +72,7 @@ const HomeScreen = ({}) => {
         </TouchableOpacity>
       </View>
       
+      {product.data.length === 0 ? <Text>Empty Product</Text> : 
       <FlatList
           numColumns={2}
           data={product.data_filter}
@@ -90,7 +91,8 @@ const HomeScreen = ({}) => {
           )}
           keyExtractor={item => item.name.toString()}
           showsVerticalScrollIndicator={false}
-        />
+        />}
+      
     </SafeAreaView>
   );
 };

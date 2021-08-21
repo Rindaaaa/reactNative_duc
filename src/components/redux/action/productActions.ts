@@ -26,6 +26,6 @@ export const getProduct = () => async (dispatch: Dispatch) => {
 export const searchProduct = (textToSearch: string) => async (dispatch: Dispatch) => {
     dispatch({
         type: SEARCH_PRODUCT,
-        payload: {textToSearch},
+        payload: textToSearch,
     })
   }

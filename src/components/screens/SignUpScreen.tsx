@@ -9,6 +9,9 @@ import {
     Alert,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+import { EndPoint } from '../config';
 
 const emailRegex =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -18,11 +21,14 @@ const SignUpScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
     const [confirmPass, setConfirm] = useState('');
-    const [userName, setUserName] = useState('');
+    const [user, setUserName] = useState('');
 
-    const isPassValid = password.length > 8;
+    const isPassValid = password.length > 5;
     const isConfirmPassValid = confirmPass == password;
     const isEmailValid = emailRegex.test(email);
+
+    const queryClient = useQueryClient();
+    const mutation = useMutation((newTodo: any) => axios.post(`${EndPoint}/user`, newTodo));
 
     return (
         <View style={styles.container}>
@@ -36,9 +42,9 @@ const SignUpScreen = () => {
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <FontAwesome name="envelope-o" size={18} color="white" />
                     <TextInput
-                        placeholder="Email"
+                        placeholder="abc@zyx.com"
                         style={styles.input}
-                        placeholderTextColor="white"
+                        placeholderTextColor="grey"
                         keyboardType="email-address"
                         onChangeText={setEmail}
                     />
@@ -54,13 +60,13 @@ const SignUpScreen = () => {
                         style={{ marginRight: 5 }}
                     />
                     <TextInput
-                        placeholder="Username"
+                        placeholder="Duc"
                         style={styles.input}
-                        placeholderTextColor="white"
+                        placeholderTextColor="grey"
                         onChangeText={setUserName}
                     />
                 </View>
-                {!userName && <Text style={styles.setValid}>Username is Invalid</Text>}
+                {!user && <Text style={styles.setValid}>Username is Invalid</Text>}
 
                 <Text style={{ fontSize: 18, color: 'white', marginTop: 15 }}>
                     Password
@@ -68,10 +74,10 @@ const SignUpScreen = () => {
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <FontAwesome name="key" size={18} color="white" />
                     <TextInput
-                        placeholder="Password"
+                        placeholder="*****"
                         style={styles.input}
                         secureTextEntry
-                        placeholderTextColor="white"
+                        placeholderTextColor="grey"
                         onChangeText={setPass}
                     />
                 </View>
@@ -85,10 +91,10 @@ const SignUpScreen = () => {
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                     <FontAwesome name="key" size={18} color="white" />
                     <TextInput
-                        placeholder="Confirm Password"
+                        placeholder="*****"
                         style={styles.input}
                         secureTextEntry
-                        placeholderTextColor="white"
+                        placeholderTextColor="grey"
                         onChangeText={setConfirm}
                     />
                 </View>
@@ -97,13 +103,13 @@ const SignUpScreen = () => {
                 )}
 
                 <TouchableOpacity
-                    onPress={() => Alert.alert('Sign Up Success')}
+                    onPress={() => mutation.mutate({user, password, email})}
                     style={styles.signIn_button}>
                     <Text style={styles.text_SignIn}>Sign up</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('SignIn')}
+                    onPress={() => navigation.goBack()}
                     style={[styles.signIn_button, { marginTop: 15 }]}>
                     <Text style={styles.text_SignIn}>Sign in</Text>
                 </TouchableOpacity>

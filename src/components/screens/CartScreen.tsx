@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity, Alert} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
@@ -13,75 +13,93 @@ const data = [
     price: 62,
     img: "https://s1.thcdn.com/productimg/1600/1600/13099653-1004873647326331.jpg",
     id: "1"
-   },
-   {
+  },
+  {
     name: "CHILLI A2 SURFBOARD",
     price: 49,
     img: "https://cdn.shopify.com/s/files/1/0003/1902/9309/products/chilli_a2_fut_600x.jpg?v=1628706195",
     id: "2"
-   },
+  },
 ];
 
+const Item = ({ item }: any) => {
+  const [count, setCount] = useState(1);
+  const onPressAdd = () => setCount(prevCount => prevCount + 1);
+  const onPressRemove = () => setCount(prevCount => prevCount - 1);
+
+  return (
+    <View style={styles.itemBox}>
+      <Image source={{ uri: item.img }} style={styles.image} />
+      <View style={{ height: 120, marginLeft: 20, marginVertical: 20, flex: 1 }}>
+        <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
+        <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold', marginTop: 5 }}>${item.price}</Text>
+      </View>
+      <View style={{ marginTop: 20, marginHorizontal: 20, alignItems: 'center' }}>
+        <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>{count}</Text>
+        <View style={styles.countProduct}>
+          <TouchableOpacity onPress={onPressRemove}>
+            <Ionicons name="remove" size={18} style={{ borderRightWidth: 1 }} />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={onPressAdd}>
+            <Ionicons name="add" size={18} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  )
+}
 
 const CartScreen = () => {
   const navigation = useNavigation();
   const product = useAppSelector(state => state.addToCardReducer);
   const dispatch = useAppDispatch();
-  console.log('productCart',product)
+  console.log('productCart : ', product)
 
-  // useEffect(() => {
-  //   dispatch(getProductCard(product));
-  // },[]);
-  
+  useEffect(() => {
+    dispatch(getProductCard(product));
+  }, []);
+
   return (
-    <SafeAreaView style={{backgroundColor: "white",flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <View style={styles.header}>
         <Ionicons name="arrow-back" size={28} onPress={navigation.goBack} />
-        <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 20}}>Cart</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 20 }}>Cart</Text>
       </View>
+
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={product.product}
-        renderItem={({item}) => (
-          <View style = {styles.itemBox}>
-            <Image source={{uri: item.img}} style={styles.image}/>
-            <View style={{height: 120, marginLeft: 20, marginVertical: 20, flex: 1}}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>{item.name}</Text>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold', marginTop: 5}}>${item.price}</Text>
+        data={data}
+        renderItem={({ item, index }) => <Item key={index} item={item} />}
+        ListFooterComponentStyle={{marginTop: 60}}
+        ListFooterComponent={() => (
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginVertical: 20 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Total Price</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 18 }}>$111</Text>
             </View>
-            <View style={{marginTop: 20, marginHorizontal: 20 ,alignItems: 'center'}}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>3</Text>
-              <View style={styles.countProduct}>
-                <Ionicons name="remove" size={18}/>
-                <Ionicons name="add" size={18}/>
-              </View>
+
+            <View style={{ marginVertical: 20 }}>
+              <TouchableOpacity
+                onPress={() => Alert.alert('Checked')}
+                style={styles.pay}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    color: 'white',
+                  }}>
+                  Check out
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}
         keyExtractor={item => item.name.toString()}
       />
-      <View style={{flex: 1}}>
-        <View style={{flexDirection: 'row', justifyContent:'space-between', marginHorizontal: 20, marginVertical: 20}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>Total Price</Text>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>$100</Text>
-        </View> 
 
-        <View style={{marginVertical: 20}}>
-          <TouchableOpacity
-            onPress={() => Alert.alert('Checked')}
-            style={styles.pay}>
-            <Text
-              style={{
-              textAlign: 'center',
-              fontWeight: 'bold',
-              fontSize: 18,
-              color: 'white',
-              }}>
-              Check out
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+
     </SafeAreaView>
   );
 };
@@ -93,28 +111,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 15,
   },
-  itemBox:{
+  itemBox: {
     height: 120,
-    borderRadius: 20, 
-    backgroundColor: '#008080', 
-    marginHorizontal: 20, 
+    borderRadius: 20,
+    backgroundColor: '#008080',
+    marginHorizontal: 20,
     marginVertical: 10,
     paddingHorizontal: 15,
     flexDirection: 'row',
-    alignContent:'center',
+    alignContent: 'center',
     flex: 1
   },
-  image:{
-    height:70, width:70, 
-    resizeMode:'contain', 
+  image: {
+    height: 70, width: 70,
+    resizeMode: 'contain',
     marginVertical: 25,
   },
-  countProduct:{
-    borderRadius: 10, 
-    height: 20, 
-    width: 50, 
-    backgroundColor: 'white', 
-    flexDirection:'row',
+  countProduct: {
+    borderRadius: 10,
+    height: 20,
+    width: 50,
+    backgroundColor: 'white',
+    flexDirection: 'row',
     marginVertical: 5,
     justifyContent: 'center'
   },

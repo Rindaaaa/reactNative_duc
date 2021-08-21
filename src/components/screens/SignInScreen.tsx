@@ -27,9 +27,9 @@ const SignInScreen: FC = () => {
         <View style={{flexDirection: 'row', marginTop: 10}}>
           <FontAwesome name="user" size={22} color="white" />
           <TextInput
-            placeholder="Username"
+            placeholder="abc@xyz.com"
             style={styles.input}
-            placeholderTextColor="white"
+            placeholderTextColor="grey"
             onChangeText={setEmail}
           />
         </View>
@@ -40,10 +40,10 @@ const SignInScreen: FC = () => {
         <View style={{flexDirection: 'row', marginTop: 10}}>
           <FontAwesome name="key" size={18} color="white" />
           <TextInput
-            placeholder="Password"
+            placeholder="*****"
             style={styles.input}
             secureTextEntry
-            placeholderTextColor="white"
+            placeholderTextColor="grey"
             onChangeText={setPass}
           />
         </View>

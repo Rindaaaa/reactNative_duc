@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { Dialog } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useAppDispatch } from '../../../hooks';
 import { addToCard } from '../redux/action/addToCardActions';

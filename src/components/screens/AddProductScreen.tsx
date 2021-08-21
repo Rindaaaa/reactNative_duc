@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { EndPoint } from '../config';
@@ -21,7 +21,6 @@ const AddProductScreen = () => {
             },
         },
     );
-    console.log(mutation);
     return (
         <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
             <View style={styles.header}>

@@ -36,7 +36,7 @@ const ProfileScreen = () => {
         />
         <View style={{marginLeft: 20}}>
           <Title style ={{fontSize: 22}}>Duc</Title>
-          <Caption style ={{fontSize: 15}}>@duc@{user.email}</Caption>
+          <Caption style ={{fontSize: 15}}>{user.email}</Caption>
         </View>
       </View>
       <View style={styles.boxContainer}>

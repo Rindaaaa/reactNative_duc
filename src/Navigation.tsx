@@ -39,7 +39,7 @@ const Navigation: FC = () => {
   return (
     <NavigationContainer>
       <StatusBar backgroundColor={"white"} barStyle="dark-content" />
-      {user.isLogIn == true ? (
+      {user.isLogIn ? (
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home" component={TabView} />
         </Stack.Navigator>
